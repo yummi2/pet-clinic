@@ -103,6 +103,7 @@ jobs:
         with:
           image: ${{ env.APP_NAME }}
           tag: ${{ env.IMAGE_TAG }}
+          oci: true
           base-image: docker.io/fabric8/java-alpine-openjdk11-jre
           content: ${{ env.JAR_NAME }}
           entrypoint: |
