@@ -1,5 +1,6 @@
 name: OpenShift Pet Clinic Workflow
 on: [ push, workflow_dispatch ]
+
 env:
   REGISTRY_USER: tetchell
   IMAGE_REGISTRY: quay.io

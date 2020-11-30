@@ -2,7 +2,7 @@
 # of the application using source to image build
 # startegy and push the image to quay.io (Image registry)
 
-name: Build and Push
+name: S2I build and push
 on: [push, workflow_dispatch, pull_request]
 env:
   IMAGE_REGISTRY: quay.io
@@ -13,7 +13,7 @@ env:
 jobs:
   test-s2i-job:
     runs-on: ubuntu-latest
-    name: A job to build and push image
+    name: S2I build and push
     steps:
       # Setup Docker Deamon as Docker Daemon should be
       # running to successfully build image using s2i
@@ -35,7 +35,7 @@ jobs:
           tag: ${{ env.IMAGE_TAG }}
           builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
           image_name: ${{ env.APP_NAME }}
-          
+
       # Push Image to Quay registry
       - name: Push To Quay Action
         uses: redhat-actions/push-to-registry@main
@@ -45,4 +45,3 @@ jobs:
           registry: ${{ env.IMAGE_REGISTRY }}/${{ env.REGISTRY_USER }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-
