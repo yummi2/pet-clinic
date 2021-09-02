@@ -1,39 +1,40 @@
 # This example workflow will build container image
 # of the application using source to image build
-# startegy and push the image to quay.io (Image registry)
+# startegy and push the image to ghcr.io (Image registry)
 
 name: S2I build and push
-on: [push, workflow_dispatch, pull_request]
+on: [ push, workflow_dispatch, pull_request ]
 env:
-  IMAGE_REGISTRY: quay.io
-  REGISTRY_USER: tetchell
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
   APP_NAME: petclinic
-  IMAGE_TAGS: latest
+  IMAGE_TAGS: latest ${{ github.sha }}
 
 jobs:
-  test-s2i-job:
-    runs-on: ubuntu-20.04
-    name: S2I build and push
+  build-and-push:
+    runs-on: ubuntu-18.04
+    name: Build and push to ghcr.io
     steps:
       # Checkout spring petclinic repository
       - name: Checkout
         uses: actions/checkout@v2
 
-      # Setup S2i and Build container image
+      # Setup S2I and build container image
       - name: Setup and Build
-        uses: redhat-actions/s2i-build@v1
-        with:
-          path_context: '.'
-          tag: ${{ env.IMAGE_TAG }}
-          builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
-          image_name: ${{ env.APP_NAME }}
-
-      # Push Image to Quay registry
-      - name: Push To Quay Action
-        uses: redhat-actions/push-to-registry@v2
+        id: build_image
+        uses: redhat-actions/s2i-build@v2
         with:
           image: ${{ env.APP_NAME }}
           tags: ${{ env.IMAGE_TAGS }}
-          registry: ${{ env.IMAGE_REGISTRY }}/${{ env.REGISTRY_USER }}
+          builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
+
+      # Push image to the GitHub container registry
+      - name: Push To GitHub container registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build_image.outputs.image }}
+          tags: ${{ steps.build_image.outputs.tags }}
+          registry: ${{ env.IMAGE_REGISTRY }}
           username: ${{ env.REGISTRY_USER }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          password: ${{ env.REGISTRY_PASSWORD }}
