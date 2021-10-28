@@ -3,7 +3,7 @@ on: [ push, workflow_dispatch ]
 
 env:
   IMAGE_REGISTRY: quay.io
-  IMAGE_NAMESPACE: redhat-github-actions
+  IMAGE_REGISTRY_NAMESPACE: redhat-github-actions
   TEST_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
   APP_NAME: petclinic
   APP_PORT: 8080
