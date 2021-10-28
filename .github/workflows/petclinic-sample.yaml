@@ -2,9 +2,9 @@ name: OpenShift Pet Clinic Workflow
 on: [ push, workflow_dispatch ]
 
 env:
-  REGISTRY_USER: tetchell
   IMAGE_REGISTRY: quay.io
-  TEST_NAMESPACE: tetchell-code
+  IMAGE_NAMESPACE: redhat-github-actions
+  TEST_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
   APP_NAME: petclinic
   APP_PORT: 8080
   TEAR_DOWN: false
@@ -118,8 +118,8 @@ jobs:
         with:
           image: ${{ steps.build-image.outputs.image }}
           tags: ${{ steps.build-image.outputs.tags }}
-          registry: ${{ env.IMAGE_REGISTRY }}/${{ env.REGISTRY_USER }}
-          username: ${{ env.REGISTRY_USER }}
+          registry: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REGISTRY_NAMESPACE }}
+          username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
   #####################################################################################################################
