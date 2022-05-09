@@ -1,0 +1,33 @@
+name: Docker Build and Release
+on: [ push ]
+env:
+#### An dieser Stelle müssen eure persönlichen Umgebungsvariablen eingetragen werden
+  # Tip: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert.
+  APP_NAME: "" #<-- hier wird der Name euer Heroku-App eingetragen
+  HEROKU_API_KEY: ${{  }} 
+  GITHUB_TOKEN: ${{  }} 
+  SONAR_TOKEN: ${{ }}
+jobs:
+  compile:
+    name: Compile
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Java
+      uses: actions/setup-java@v2
+      with:
+        distribution: temurin
+        java-version: 11
+        cache: maven
+    #### AUFGABE 2: SONAR
+      # hier kommt die Konfiguration der Sonar-Analyse rein
+  
+    - name: Compile, build and push
+      run: |
+        #### AUFGABE 3 DOCKER BUILD UND PUSH
+          # an dieser Stelle wird die Aufgabe 3 bearbeitet: heroku login, docker build, docker push
+        
+    - name: Release
+      run: |
+        #### AUFGABE 4 DEPLOYMENT AUF HEROKU
+          # hier wird die 4. Aufgabe bearbeitet: Release der App auf Heroku
