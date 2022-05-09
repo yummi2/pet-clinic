@@ -1,3 +1,5 @@
+Für den Workshop an der Hochschule Esslingen, nutzen wir ein frei verfügbares Repository von Spring
+
 # Red Hat Actions - Spring Pet Clinic Sample
 
 [![OpenShift Pet Clinic Workflow](https://github.com/redhat-actions/spring-petclinic/workflows/OpenShift%20Pet%20Clinic%20Workflow/badge.svg)](https://github.com/redhat-actions/spring-petclinic/actions)
