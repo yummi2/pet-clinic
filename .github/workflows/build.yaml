@@ -4,14 +4,13 @@ env:
 #### An dieser Stelle müssen eure persönlichen Umgebungsvariablen eingetragen werden
   # Tip: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert
   APP_NAME: "" #<-- hier wird der Name euer Heroku-App eingetragen
-  HEROKU_API_KEY: ${{ ${{ secrets.HEROKU_API_KEY }} }} 
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }} }} 
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 jobs:
   compile:
     name: Compile
- @@ -19,37 +20,19 @@ jobs:
         distribution: temurin
         java-version: 11
         cache: maven
