@@ -11,28 +11,41 @@ env:
 jobs:
   compile:
     name: Compile
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup Java
-      uses: actions/setup-java@v2
-      with:
+ @@ -19,37 +20,19 @@ jobs:
         distribution: temurin
         java-version: 11
         cache: maven
-    ####
-    - name: Cache SonarCloud packages
-      uses: actions/cache@v1
-      with:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-    - name: Cache Maven packages
-      uses: actions/cache@v1
-      with:
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-    - name: sonar analysis
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bettercodepaul_pet-clinic
+
+    - name: Compile, build and push
       run: |
-        mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=azure_voting_service
+        #### AUFGABE 3 DOCKER BUILD UND PUSH
+          # an dieser Stelle wird die Aufgabe 3 bearbeitet: heroku login, docker build, docker push
+        
+    - name: Release
+      run: |
+        #### AUFGABE 4 DEPLOYMENT AUF HEROKU
+          # hier wird die 4. Aufgabe bearbeitet: Release der App auf Heroku
