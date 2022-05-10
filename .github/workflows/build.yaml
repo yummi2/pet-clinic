@@ -2,7 +2,7 @@ name: Docker Build and Release
 on: [ push ]
 env:
 #### An dieser Stelle müssen eure persönlichen Umgebungsvariablen eingetragen werden
-  # Tip: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert.
+  # Tip: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert
   APP_NAME: "" #<-- hier wird der Name euer Heroku-App eingetragen
   HEROKU_API_KEY: ${{ ${{ secrets.HEROKU_API_KEY }} }} 
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
