@@ -1,7 +1,7 @@
 ### Example:
 ### mvn package && docker build . -t petclinic:latest
 
-FROM docker.io/fabric8/java-alpine-openjdk11-jre
+FROM maven:3.6.0-jdk-11-slim
 
 WORKDIR home
 
