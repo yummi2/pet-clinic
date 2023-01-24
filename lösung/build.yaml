@@ -37,4 +37,4 @@ jobs:
     - name: Compile, build and push
       run: |
         mvn package
-        docker build --tag registry.heroku.com/${APP_NAME}/web -f Dockerfile .
+        docker build --tag pet-clinic:latest -f Dockerfile .
