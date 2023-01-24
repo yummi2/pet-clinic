@@ -18,9 +18,9 @@ jobs:
         java-version: 11
         cache: maven
     #### AUFGABE 2: SONAR
-      # hier kommt die Konfiguration der Sonar-Analyse rein
+      # hier ist der Platz für die Konfiguration der Sonar Analyse
   
     - name: Compile, build and push
       run: |
         #### AUFGABE 3 COMPILE, DOCKER BUILD UND PUSH
-          # an dieser Stelle wird die Aufgabe 3 bearbeitet: maven package, docker build, docker push
+          # hier ist Platz für maven package und docker build
