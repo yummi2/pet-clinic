@@ -36,12 +36,5 @@ jobs:
     ####
     - name: Compile, build and push
       run: |
-        heroku container:login 
         mvn package
         docker build --tag registry.heroku.com/${APP_NAME}/web -f Dockerfile .
-        docker push registry.heroku.com/${APP_NAME}/web
-    - name: Release
-      run: |
-        heroku container:login 
-        heroku stack:set container --app ${APP_NAME}
-        heroku container:release web --app ${APP_NAME}
