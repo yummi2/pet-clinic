@@ -1,0 +1,36 @@
+image: docker:latest
+stages:
+  - build_artifacts
+  - push_dev_docker_image
+  
+variables:
+  IMAGE_NAME: "bogenliga-backend"
+  OFFLINE_IMAGE_NAME: "offline-bogenliga-backend"
+  NAME: "bogenliga-backend"
+  NAMESPACE: "bogenliga-backend"
+  INFRA_BRANCH: master
+
+build_dev_artifacts:
+  image: maven:3.6.0-jdk-8
+  stage: build_dev_artifacts
+  script:
+    - mvn package
+    - ls
+  artifacts:
+    paths:
+      - swt2-bsa-backend/bogenliga/bogenliga-application/target/bogenliga-application*.jar
+      - swt2-bsa-infrastructure/docker/backend/*
+  allow_failure: false
+
+push_dev_docker_image:
+  stage: push_dev_docker_image
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
+  script:
+    - echo Stage Push
+    - docker build test.de/$IMAGE_NAME:dev-$CI_PIPELINE_ID .
+    - docker push sss
+  needs: ["build_dev_artifacts"]
+  allow_failure: false
+
