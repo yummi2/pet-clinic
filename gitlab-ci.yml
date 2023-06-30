@@ -1,0 +1,26 @@
+image: docker:latest
+stages:
+  - build_artifacts
+  - push_dev_docker_image
+  
+variables:
+
+
+build_dev_artifacts:
+  image: maven:3.6.0-jdk-8
+  stage: build_artifacts
+  script:
+    # Hier die Befehle um die App zu bauen
+  artifacts:
+    paths:
+      - target/*
+  allow_failure: false
+
+push_dev_docker_image:
+  stage: push_dev_docker_image
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
+  script:
+    # Hier die Befehle zum Docker Image bauen und pushen
+  allow_failure: false
