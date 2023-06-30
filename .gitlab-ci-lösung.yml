@@ -1,0 +1,31 @@
+image: docker:latest
+stages:
+  - build_artifacts
+  - push_dev_docker_image
+  
+variables:
+
+
+build_dev_artifacts:
+  image: maven:3.6.0-jdk-8
+  stage: build_artifacts
+  script:
+    - mvn package
+    - cd target
+    - ls
+  artifacts:
+    paths:
+      - target/*
+  allow_failure: false
+
+push_dev_docker_image:
+  stage: push_dev_docker_image
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
+  script:
+    - echo Stage Push
+    - docker build -t test.de/pet-clinic:dev-$CI_PIPELINE_ID .
+    - docker login -u test -p $password
+    - docker push sss
+  allow_failure: false
