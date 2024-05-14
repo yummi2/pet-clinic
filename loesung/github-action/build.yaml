@@ -1,0 +1,31 @@
+name: Docker Build and Release
+on: [ push ]
+env:
+  APP_NAME: "pet-clinic-test123"
+  GITHUB_ACCESSTOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  compile:
+    name: Compile
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: temurin
+          java-version: 11
+          cache: maven
+
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Compile, build and push
+        run: |
+          mvn package
+          docker build --tag ghcr.io/bettercodepaul/petclinic:latest -f Dockerfile .
+          docker login --username jny-gk --password $GITHUB_ACCESSTOKEN ghcr.io
+          docker push ghcr.io/bettercodepaul/petclinic:latest
