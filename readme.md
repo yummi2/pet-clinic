@@ -1,4 +1,3 @@
-
 Für den Workshop an Hochschulen, nutzen wir ein frei verfügbares Repository von Spring
 
 # Red Hat Actions - Spring Pet Clinic Sample
