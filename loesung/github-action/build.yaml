@@ -1,7 +1,8 @@
 name: Docker Build and Release
 on: [ push ]
 env:
-  APP_NAME: "pet-clinic-test123"
+  #### An dieser Stelle müssen eure persönlichen Umgebungsvariablen eingetragen werden
+  # Tipp: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert.
   GITHUB_ACCESSTOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   compile:
@@ -15,13 +16,6 @@ jobs:
           distribution: temurin
           java-version: 11
           cache: maven
-
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
 
       - name: Compile, build and push
         run: |

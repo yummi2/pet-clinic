@@ -3,8 +3,7 @@ on: [ push ]
 env:
 #### An dieser Stelle müssen eure persönlichen Umgebungsvariablen eingetragen werden
   # Tip: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert.
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  GITHUB_ACCESSTOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   compile:
     name: Compile
@@ -17,8 +16,6 @@ jobs:
         distribution: temurin
         java-version: 11
         cache: maven
-    #### AUFGABE 2: SONAR
-      # hier ist der Platz für die Konfiguration der Sonar Analyse
   
     - name: Compile, build and push
       run: |
