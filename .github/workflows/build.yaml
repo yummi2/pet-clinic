@@ -2,8 +2,8 @@ name: Docker Build and Release
 on: [ push ]
 env:
 #### An dieser Stelle müssen eure persönlichen Umgebungsvariablen eingetragen werden
-  # Tip: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert.
-  GITHUB_ACCESSTOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # Tipp: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert.
+  GITHUB_ACCESSTOKEN: ${{ secrets.GITHUB_ACCESSTOKEN }}
 jobs:
   compile:
     name: Compile
@@ -19,5 +19,5 @@ jobs:
   
     - name: Compile, build and push
       run: |
-        #### AUFGABE 3 COMPILE, DOCKER BUILD UND PUSH
+        #### AUFGABE COMPILE, DOCKER BUILD UND PUSH
           # hier ist Platz für maven package und docker build
