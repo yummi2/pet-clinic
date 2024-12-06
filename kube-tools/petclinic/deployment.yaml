@@ -1,18 +1,18 @@
-### Hier wird der Namespace der Anwendung erstellt
+### Hier wird der Namespace der Anwendung erstellt.
 apiVersion: v1
 kind:
 metadata:
   name:
 
 ---
-### Hier wird das Deployment der Anwendung erstellt
+### Hier wird das Deployment der Anwendung erstellt.
 apiVersion: apps/v1
 kind:
 metadata:
   name: petclinic-deployment
   namespace:
 spec:
-  ### Hier wird spezifiert, wie viele Replikate der Anwendung erstellt werden sollen
+  ### Hier wird spezifiert, wie viele Replikate der Anwendung erstellt werden sollen.
   replicas:
   selector:
     matchLabels:
@@ -23,11 +23,11 @@ spec:
         app: petclinic
     spec:
       containers:
-        ### Hier wird spezifiert, wie der Container heißen soll und welches Image verwendet wird
+        ### Hier wird spezifiert, wie der Container heißen soll und welches Image verwendet wird.
         -
 
 ---
-### Hier wird der Service der Anwendung erstellt
+### Hier wird der Service der Anwendung erstellt.
 apiVersion: v1
 kind:
 metadata:
@@ -38,5 +38,5 @@ spec:
   selector:
     app: petclinic
   ports:
-    ### Hier werden die Ports der Anwendung definiert. Es müssen port, targetport und nodeport definiert werden.
+    ### Hier werden die Ports der Anwendung definiert. Es müssen port, targetPort und nodePort definiert werden.
     -
