@@ -21,7 +21,7 @@ jobs:
     - name: Compile, build and push
       run: |
         #### AUFGABE COMPILE, DOCKER BUILD UND PUSH
-          # hier ist Platz für maven package und docker build
+       
         mvn package
         docker login ghcr.io  -u yummi2 -p $GITHUB_ACCSESSTOKEN
         docker build -t ghcr.io/yummi2/pet-clinic:latest .
