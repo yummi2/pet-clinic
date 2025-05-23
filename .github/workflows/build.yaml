@@ -20,8 +20,7 @@ jobs:
     - name: Compile, build and push
       run: |
         #### AUFGABE COMPILE, DOCKER BUILD UND PUSH
-       
         mvn package
-        docker login ghcr.io --username yummi2 --password $GITHUB_ACCSESSTOKEN
+        docker login --username yummi2 --password $GITHUB_ACCESSTOKEN ghcr.io
         docker build -t ghcr.io/yummi2/pet-clinic:latest .
         docker push ghcr.io/yummi2/pet-clinic:latest
