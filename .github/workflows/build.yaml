@@ -3,7 +3,8 @@ on: [ push ]
 env:
 #### An dieser Stelle müssen eure persönlichen Umgebungsvariablen eingetragen werden
   # Tipp: Die Token/der API-Key werden als Secrets in den Repository-Settings eingetragen und hier referenziert.
-  GITHUB_ACCESSTOKEN: ${{ secrets.GITHUB_ACCESSTOKEN }}
+  GITHUB_ACCESSTOKEN: ${{ secrets.token }}
+
 jobs:
   compile:
     name: Compile
@@ -21,3 +22,7 @@ jobs:
       run: |
         #### AUFGABE COMPILE, DOCKER BUILD UND PUSH
           # hier ist Platz für maven package und docker build
+        mvn package
+        docker login ghcr.io  -u yummi2 -p $GITHUB_ACCSESSTOKEN
+        docker build -t ghcr.io/yummi2/pet-clinic:latest .
+        docker push ghcr.io/yummi2/pet-clinic:latest
