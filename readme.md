@@ -66,3 +66,4 @@ docker run -p 8080:8080 petclinic:latest
 ```
 
 After the server starts, the app will be available at `localhost:8080`.
+<!-- Test der CI-Pipeline -->
